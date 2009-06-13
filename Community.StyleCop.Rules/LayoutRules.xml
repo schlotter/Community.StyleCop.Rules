@@ -34,7 +34,7 @@ with StyleCop Community Rules. If not, see <http://www.gnu.org/licenses/>.
       Description="The maximum allowed line length."/>
     <BooleanProperty
       Name="IncludeGenerated"
-      DefaultValue="true"
+      DefaultValue="false"
       FriendlyName="Include generated code"
       Description="Indicates whether to enforce the rules on generated code."/>
   </Properties>
