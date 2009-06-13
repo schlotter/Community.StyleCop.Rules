@@ -60,6 +60,8 @@ namespace Community.StyleCop.CSharp
         /// class.
         /// </summary>
         /// <param name="analyzer">The analyzer.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="analyzer"/> is <c>null</c>.</exception>
         public LayoutSettingsPage(LayoutRules analyzer)
         {
             Param.RequireNotNull(analyzer, "analyzer");
@@ -151,8 +153,12 @@ namespace Community.StyleCop.CSharp
         /// </summary>
         /// <param name="propertyControl">The property control that hosts this
         /// tab.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="propertyControl"/> is <c>null</c>.</exception>
         public void Initialize(PropertyControl propertyControl)
         {
+            Param.RequireNotNull(propertyControl, "propertyControl");
+
             // Save the property control.
             this.tabControl = propertyControl;
 

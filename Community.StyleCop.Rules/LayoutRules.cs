@@ -61,8 +61,12 @@ namespace Community.StyleCop.CSharp
         /// Analyzes the document.
         /// </summary>
         /// <param name="document">The document.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="document"/> is <c>null</c>.</exception>
         public override void AnalyzeDocument(CodeDocument document)
         {
+            Param.RequireNotNull(document, "document");
+
             this.IncludeGenerated = this.GetValue<bool>(
                 document.Settings,
                 Strings.IncludeGenerated);
@@ -94,6 +98,10 @@ namespace Community.StyleCop.CSharp
         /// <returns>If available, returns the configured value of the
         /// specified property; otherwise the property's default value is
         /// returned.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="settings"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref
+        /// name="propertyName"/> is <c>null</c> or empty.</exception>
         internal T GetValue<T>(Settings settings, string propertyName)
         {
             Param.RequireNotNull(settings, "settings");
@@ -118,8 +126,12 @@ namespace Community.StyleCop.CSharp
         /// </param>
         /// <returns><c>true</c> if <paramref name="s"/> has trailing
         /// whitespace; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="s"/> is <c>null</c>.</exception>
         private static bool HasTrailingWhitespace(string s)
         {
+            Param.RequireNotNull(s, "s");
+
             return s != s.TrimEnd(null);
         }
 
@@ -188,6 +200,9 @@ namespace Community.StyleCop.CSharp
         /// </summary>
         /// <param name="rootElement">The root element.</param>
         /// <param name="node">One node of the linked token list.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="rootElement"/> or <paramref name="node"/> is <c>null</c>.
+        /// </exception>
         private void CheckForLinesWithTrailingWhitespace(
             DocumentRoot rootElement,
             Node<CsToken> node)
@@ -291,7 +306,7 @@ namespace Community.StyleCop.CSharp
         /// <param name="maximumLineLength">Maximum allowed length of a line.
         /// </param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref
-        /// name="rootElement"/> or <paramref name="token"/> is null.
+        /// name="rootElement"/> or <paramref name="token"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref
         /// name="maximumLineLength"/> is not positive.</exception>
@@ -350,6 +365,9 @@ namespace Community.StyleCop.CSharp
         /// <param name="rootElement">The root element.</param>
         /// <param name="lastNode">The last node of the linked token list.
         /// </param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="rootElement"/> or <paramref name="lastNode"/> is <c>null</c>.
+        /// </exception>
         private void CheckIfDocumentEndsWithMultipleWhitespaceLines(
             DocumentRoot rootElement,
             Node<CsToken> lastNode)
@@ -399,6 +417,9 @@ namespace Community.StyleCop.CSharp
         /// </summary>
         /// <param name="rootElement">The root element.</param>
         /// <param name="firstToken">The first document token.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="rootElement"/> or <paramref name="firstToken"/> is
+        /// <c>null</c>.</exception>
         private void CheckIfFileStartsWithWhitespace(
             DocumentRoot rootElement,
             CsToken firstToken)
@@ -425,6 +446,9 @@ namespace Community.StyleCop.CSharp
         /// </summary>
         /// <param name="rootElement">The root element.</param>
         /// <param name="lastToken">The last document token.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="rootElement"/> or <paramref name="lastToken"/> is
+        /// <c>null</c>.</exception>
         private void CheckIfFileEndsWithNewline(
             DocumentRoot rootElement,
             CsToken lastToken)
