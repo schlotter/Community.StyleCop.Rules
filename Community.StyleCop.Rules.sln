@@ -1,0 +1,26 @@
+
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Community.StyleCop.Rules", "Community.StyleCop.Rules\Community.StyleCop.Rules.csproj", "{D5FDDD5D-A154-414D-BBBE-70F1F1029E5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{60D7E2A6-89AE-4D5F-877B-FECB47D778AC}"
+	ProjectSection(SolutionItems) = preProject
+		Libraries\Microsoft.StyleCop.CSharp.dll = Libraries\Microsoft.StyleCop.CSharp.dll
+		Libraries\Microsoft.StyleCop.dll = Libraries\Microsoft.StyleCop.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5FDDD5D-A154-414D-BBBE-70F1F1029E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FDDD5D-A154-414D-BBBE-70F1F1029E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5FDDD5D-A154-414D-BBBE-70F1F1029E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5FDDD5D-A154-414D-BBBE-70F1F1029E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

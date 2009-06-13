@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+<copyright file="LayoutRules.xml" company="n/a">
+Copyright 2009 Christian Schlotter
+
+This file is part of StyleCop Community Rules.
+
+StyleCop Community Rules is free software: you can redistribute it and/or
+modify it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+StyleCop Community Rules is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with StyleCop Community Rules. If not, see <http://www.gnu.org/licenses/>.
+</copyright>
+<author>Christian Schlotter</author>
+<email>again@gmx.de</email>
+<summary>Rules metadata for LayoutRules analyzer.</summary>
+-->
+<SourceAnalyzer Name="Layout Rules (Community)">
+  <Description>
+    Community rules for checking the layout of a file.
+  </Description>
+  <Properties>
+    <IntegerProperty
+      Name="MaximumLineLength"
+      DefaultValue="79"
+      FriendlyName="Maximum line length"
+      Description="The maximum allowed line length."/>
+    <BooleanProperty
+      Name="IncludeGenerated"
+      DefaultValue="true"
+      FriendlyName="Include generated code"
+      Description="Indicates whether to enforce the rules on generated code."/>
+  </Properties>
+  <Rules>
+    <Rule Name="LinesMustNotEndWithWhitespace" CheckId="CO1000">
+      <Context>Lines must not end with whitespace.</Context>
+      <Description>Validates that the character a newline is never preceeded by whitespace.</Description>
+    </Rule>
+    <Rule Name="LinesMustNotBeLongerThanNumCharacters" CheckId="CO1001">
+      <Context>Line length must not exceed {0} characters.</Context>
+      <Description>Validates that line length does not exceed a configurable number of characters.</Description>
+    </Rule>
+    <Rule Name="FilesMustNotEndWithMultipleEmptyLines" CheckId="CO1002">
+      <Context>Files must not end with multiple empty lines.</Context>
+      <Description>Validates that a file does not end with more than one empty line.</Description>
+    </Rule>
+    <Rule Name="FilesMustEndWithNewline" CheckId="CO1003">
+      <Context>Files must end with a new line.</Context>
+      <Description>Validates that a file ends with a new line.</Description>
+    </Rule>
+    <Rule Name="FilesMustNotStartWithWhitespace" CheckId="CO1004">
+      <Context>Files must not start with whitespace.</Context>
+      <Description>Validates that a file does not start with whitespace.</Description>
+    </Rule>
+  </Rules>
+</SourceAnalyzer>
