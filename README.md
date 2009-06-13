@@ -36,7 +36,7 @@ You can configure the rules through StyleCop Settings in Microsoft Visual Studio
 Bugs
 ----
 
-If you find bugs in this software, please [create an issue](http://github.com/schlotter/Community.StyleCop.Rules/issues) or [contact me directly](again@gmx.de). Of course, patches and forks are also welcome!
+If you find bugs in this software, please [create an issue](http://github.com/schlotter/Community.StyleCop.Rules/issues) or [contact me directly](mailto:again@gmx.de). Of course, patches and forks are also welcome!
 
 License
 -------
