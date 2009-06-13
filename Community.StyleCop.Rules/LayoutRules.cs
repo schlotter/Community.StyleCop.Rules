@@ -215,7 +215,7 @@ namespace Community.StyleCop.CSharp
                 return;
             }
 
-            // simple case: whitespace followed be newline
+            // simple case: whitespace followed by newline
             if (node.Previous != null &&
                 node.Previous.Value.CsTokenType == CsTokenType.WhiteSpace &&
                 node.Value.CsTokenType == CsTokenType.EndOfLine)
@@ -236,7 +236,7 @@ namespace Community.StyleCop.CSharp
                     Rules.LinesMustNotEndWithWhitespace);
             }
 
-            // multi line comment (/* */): split by lines and check each line
+            // multi-line comment (/* */): split by lines and check each line
             // for trailing whitespace
             if (node.Value.CsTokenType == CsTokenType.MultiLineComment)
             {
