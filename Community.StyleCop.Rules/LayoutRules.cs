@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 
 using Microsoft.StyleCop;
@@ -141,6 +142,33 @@ namespace Community.StyleCop.CSharp
         }
 
         /// <summary>
+        /// Determines whether the specified token type occupies the rest of
+        /// the line.
+        /// </summary>
+        /// <param name="token">The token.</param>
+        /// <returns><c>true</c> if the specified token occupies the rest of
+        /// the line; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref
+        /// name="token"/> is <c>null</c>.</exception>
+        private static bool IsEatLineToken(CsToken token)
+        {
+            Param.RequireNotNull(token, "token");
+
+            switch (token.CsTokenType)
+            {
+                case CsTokenType.PreprocessorDirective:
+                case CsTokenType.SingleLineComment:
+                case CsTokenType.XmlHeaderLine:
+                    Debug.Assert(
+                        token.Location.LineSpan == 1,
+                        "Token unexpectedly spans multiple lines.");
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        /// <summary>
         /// Gets the default value of the specified property.
         /// </summary>
         /// <typeparam name="T">Type of the property's value.</typeparam>
@@ -185,17 +213,18 @@ namespace Community.StyleCop.CSharp
             int maximumLineLength = this.GetValue<int>(
                 csDocument.Settings,
                 Strings.MaximumLineLength);
+            CsToken previousToken = null;
 
-            for (Node<CsToken> tokenNode = csDocument.Tokens.First;
-                tokenNode != null;
-                tokenNode = tokenNode.Next)
+            foreach (
+                CsToken token in new ChildTokenCollection(csDocument.Tokens))
             {
                 this.CheckForLinesWithTrailingWhitespace(
                     csDocument.RootElement,
-                    tokenNode);
+                    token,
+                    previousToken);
                 this.CheckLineLength(
                     csDocument.RootElement,
-                    tokenNode.Value,
+                    token,
                     maximumLineLength);
             }
         }
@@ -204,51 +233,54 @@ namespace Community.StyleCop.CSharp
         /// Checks for lines with trailing whitespace.
         /// </summary>
         /// <param name="rootElement">The root element.</param>
-        /// <param name="node">One node of the linked token list.</param>
+        /// <param name="token">The current token.</param>
+        /// <param name="previousToken">The previous token or <c>null</c> if
+        /// there is no previous token.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref
-        /// name="rootElement"/> or <paramref name="node"/> is <c>null</c>.
+        /// name="rootElement"/> or <paramref name="token"/> is <c>null</c>.
         /// </exception>
         private void CheckForLinesWithTrailingWhitespace(
             DocumentRoot rootElement,
-            Node<CsToken> node)
+            CsToken token,
+            CsToken previousToken)
         {
             Param.RequireNotNull(rootElement, "rootElement");
-            Param.RequireNotNull(node, "node");
+            Param.RequireNotNull(token, "token");
 
-            if (!this.IncludeGenerated && node.Value.Generated)
+            if (!this.IncludeGenerated && token.Generated)
             {
                 return;
             }
 
             // simple case: whitespace followed by newline
-            if (node.Previous != null &&
-                node.Previous.Value.CsTokenType == CsTokenType.WhiteSpace &&
-                node.Value.CsTokenType == CsTokenType.EndOfLine)
+            if (previousToken != null &&
+                previousToken.CsTokenType == CsTokenType.WhiteSpace &&
+                token.CsTokenType == CsTokenType.EndOfLine)
             {
                 this.AddViolation(
                     rootElement,
-                    node.Value.LineNumber,
+                    token.LineNumber,
                     Rules.LinesMustNotEndWithWhitespace);
             }
 
-            // check if single line (//) comment contains trailing whitespace
-            if (node.Value.CsTokenType == CsTokenType.SingleLineComment &&
-                HasTrailingWhitespace(node.Value.Text))
+            // check if a token which includes the rest of the line contains
+            // trailing whitespace
+            if (IsEatLineToken(token) && HasTrailingWhitespace(token.Text))
             {
                 this.AddViolation(
                     rootElement,
-                    node.Value.LineNumber,
+                    token.LineNumber,
                     Rules.LinesMustNotEndWithWhitespace);
             }
 
             // multi-line comment (/* */): split by lines and check each line
             // for trailing whitespace
-            if (node.Value.CsTokenType == CsTokenType.MultiLineComment)
+            if (token.CsTokenType == CsTokenType.MultiLineComment)
             {
                 this.CheckMultiLineComment(
                     rootElement,
-                    node.Value,
-                    (string s) => HasTrailingWhitespace(s),
+                    token,
+                    (string s, int i) => HasTrailingWhitespace(s),
                     Rules.LinesMustNotEndWithWhitespace);
             }
         }
@@ -275,7 +307,7 @@ namespace Community.StyleCop.CSharp
         private void CheckMultiLineComment(
             DocumentRoot rootElement,
             CsToken token,
-            Func<string, bool> checkDelegate,
+            Func<string, int, bool> checkDelegate,
             Rules violatedRuleIfCheckFails,
             params object[] violationContext)
         {
@@ -292,7 +324,7 @@ namespace Community.StyleCop.CSharp
                 token.Text.Split(newLine, StringSplitOptions.None);
             for (int index = 0; index < splitComment.Length; index++)
             {
-                if (checkDelegate(splitComment[index]))
+                if (checkDelegate(splitComment[index], index))
                 {
                     this.AddViolation(
                         rootElement,
@@ -333,15 +365,22 @@ namespace Community.StyleCop.CSharp
 
             if (token.CsTokenType == CsTokenType.MultiLineComment)
             {
+                int startIndex = token.Location.StartPoint.IndexOnLine;
+                Func<string, int, bool> checkDelegate = (string s, int i) =>
+                    ((i == 0) ? startIndex : 0) + s.Length > maximumLineLength;
                 this.CheckMultiLineComment(
                     rootElement,
                     token,
-                    (string s) => s.Length > maximumLineLength,
+                    checkDelegate,
                     Rules.LinesMustNotBeLongerThanNumCharacters,
                     maximumLineLength);
             }
             else
             {
+                Debug.Assert(
+                    token.Location.LineSpan == 1,
+                    "Token unexpectedly spans multiple lines.");
+
                 int lineLength;
                 if (token.CsTokenType == CsTokenType.EndOfLine)
                 {

@@ -51,6 +51,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChildTokenCollection.cs" />
     <Compile Include="LayoutSettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
