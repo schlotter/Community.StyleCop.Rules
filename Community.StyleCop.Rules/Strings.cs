@@ -28,13 +28,18 @@ namespace Community.StyleCop.CSharp
     internal static class Strings
     {
         /// <summary>
-        /// The string "IncludeGenerated".
+        /// The string <i>IncludeGenerated</i>.
         /// </summary>
         public const string IncludeGenerated = "IncludeGenerated";
 
         /// <summary>
-        /// The string "MaximumLineLength".
+        /// The string <i>MaximumLineLength</i>.
         /// </summary>
         public const string MaximumLineLength = "MaximumLineLength";
+
+        /// <summary>
+        /// The string <i>ChildTokens</i>.
+        /// </summary>
+        public const string ChildTokens = "ChildTokens";
     }
 }

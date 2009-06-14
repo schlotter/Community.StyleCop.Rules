@@ -76,10 +76,15 @@ namespace Community.StyleCop.CSharp
                 (this.IncludeGenerated ||
                 !csDocument.RootElement.Generated))
             {
+                // check start of document
                 this.CheckIfFileStartsWithWhitespace(
                     csDocument.RootElement,
                     csDocument.Tokens.First.Value);
+
+                // check whole document
                 this.IterateDocumentTokens(csDocument);
+
+                // check end of document
                 this.CheckIfDocumentEndsWithMultipleWhitespaceLines(
                     csDocument.RootElement,
                     csDocument.Tokens.Last);
