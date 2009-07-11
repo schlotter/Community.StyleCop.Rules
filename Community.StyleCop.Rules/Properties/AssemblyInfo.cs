@@ -27,12 +27,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("StyleCop.Community.Rules")]
+[assembly: AssemblyTitle("StyleCop Community Rules")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("StyleCop.Community.Rules")]
-[assembly: AssemblyCopyright("Copyright © Christian Schlotter 2009")]
+[assembly: AssemblyProduct("StyleCop Community Rules")]
+[assembly: AssemblyCopyright("Copyright © 2009 Christian Schlotter")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
