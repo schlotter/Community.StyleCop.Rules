@@ -19,7 +19,12 @@ Building the Sources
 
 StyleCop Community Rules are developed with Microsoft Visual Studio 2008. Building the project with the Express Edition should also work.
 
-Copy _Microsoft.StyleCop.dll_ and _Microsoft.StyleCop.CSharp.dll_ from the StyleCop installation directory into this project's Libraries directory. Then open the solution _Community.StyleCop.Rules.sln_ in Visual Studio and build it. The resulting DLL is called _Community.StyleCop.CSharp.Rules.dll_.
+Copy _Microsoft.StyleCop.dll_ and _Microsoft.StyleCop.CSharp.dll_ from the StyleCop installation directory into this project's Libraries directory. Then open the solution _Community.StyleCop.Rules.sln_ in Visual Studio and build it. The resulting assembly is called _Community.StyleCop.CSharp.Rules.dll_.
+
+Download
+--------
+
+If you do not want to build the assembly yourself, you can grab it from the [download page](http://github.com/schlotter/Community.StyleCop.Rules/downloads).
 
 Installation
 ------------
