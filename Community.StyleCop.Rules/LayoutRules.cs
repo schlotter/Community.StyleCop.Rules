@@ -476,7 +476,8 @@ namespace Community.StyleCop.CSharp
                 return;
             }
 
-            if (firstToken.CsTokenClass == CsTokenClass.Whitespace)
+            if (firstToken.CsTokenType == CsTokenType.WhiteSpace ||
+                firstToken.CsTokenType == CsTokenType.EndOfLine)
             {
                 this.AddViolation(
                     rootElement,
