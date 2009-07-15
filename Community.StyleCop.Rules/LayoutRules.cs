@@ -226,6 +226,7 @@ namespace Community.StyleCop.CSharp
                     csDocument.RootElement,
                     token,
                     maximumLineLength);
+                previousToken = token;
             }
         }
 
