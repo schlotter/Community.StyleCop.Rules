@@ -183,7 +183,7 @@ namespace Community.StyleCop.CSharp
         /// Called after <see cref="Apply()"/> was called.
         /// </summary>
         /// <returns>Always returns <c>true</c>.</returns>
-        /// <remarks>This method onyl returns <c>true</c> and performs no other
+        /// <remarks>This method only returns <c>true</c> and performs no other
         /// tasks.</remarks>
         public bool PreApply()
         {
