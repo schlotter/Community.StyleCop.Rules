@@ -1,5 +1,5 @@
 ﻿// <copyright file="AssemblyInfo.cs" company="n/a">
-// Copyright 2009 Christian Schlotter
+// Copyright 2009, 2010 Christian Schlotter
 // This file is part of StyleCop Community Rules.
 //
 // StyleCop Community Rules is free software: you can redistribute it and/or
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("StyleCop Community Rules")]
-[assembly: AssemblyCopyright("Copyright © 2009 Christian Schlotter")]
+[assembly: AssemblyCopyright("Copyright © 2009, 2010 Christian Schlotter")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
