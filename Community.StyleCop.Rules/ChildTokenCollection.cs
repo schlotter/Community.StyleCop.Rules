@@ -87,7 +87,7 @@ namespace Community.StyleCop.CSharp
 
                 switch (token.CsTokenClass)
                 {
-                    // tokens that do not contain childtokens
+                    // tokens that do not contain child tokens
                     case CsTokenClass.Bracket:
                     case CsTokenClass.ConditionalCompilationDirective:
                     case CsTokenClass.Number:
@@ -141,7 +141,7 @@ namespace Community.StyleCop.CSharp
 
         /// <summary>
         /// Determines whether the specified type has a <c>ChildTokens</c>
-        /// property that returns a <see cref="MasterList{Cstoken}"/>.
+        /// property that returns a <see cref="MasterList{CsToken}"/>.
         /// </summary>
         /// <param name="token">The token.</param>
         /// <param name="childTokens">If available, the value of the
