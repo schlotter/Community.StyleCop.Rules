@@ -53,7 +53,7 @@ namespace Community.StyleCop.CSharp
         /// <summary>
         /// The analyzer that is configured through this tab.
         /// </summary>
-        private LayoutRules analyzer;
+        private readonly LayoutRules analyzer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LayoutSettingsPage"/>
@@ -133,7 +133,7 @@ namespace Community.StyleCop.CSharp
                     int maximumLineLength = int.Parse(
                         this.maximumLineLengthTextBox.Text,
                         CultureInfo.CurrentCulture);
-                    IntProperty newIntProperty = new IntProperty(
+                    var newIntProperty = new IntProperty(
                         this.analyzer,
                         Strings.MaximumLineLength,
                         maximumLineLength);
@@ -206,7 +206,7 @@ namespace Community.StyleCop.CSharp
         /// </summary>
         private void InitializeSettings()
         {
-            int maximumLineLength = this.analyzer.GetValue<int>(
+            var maximumLineLength = this.analyzer.GetValue<int>(
                 this.tabControl.MergedSettings,
                 Strings.MaximumLineLength);
 
@@ -216,7 +216,7 @@ namespace Community.StyleCop.CSharp
         }
 
         /// <summary>
-        /// Handles the <see cref="E:TextBox.TextChanged"/> event of the <see
+        /// Handles the <see cref="TextBox.TextChanged"/> event of the <see
         /// cref="maximumLineLengthTextBox"/> control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>

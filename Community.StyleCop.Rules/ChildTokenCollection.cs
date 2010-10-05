@@ -41,7 +41,7 @@ namespace Community.StyleCop.CSharp
         /// <summary>
         /// The tokens of this collection.
         /// </summary>
-        private MasterList<CsToken> tokens;
+        private readonly MasterList<CsToken> tokens;
 
         /// <summary>
         /// Initializes a new instance of the <see
@@ -67,7 +67,7 @@ namespace Community.StyleCop.CSharp
         /// iterate through the collection.</returns>
         public IEnumerator<CsToken> GetEnumerator()
         {
-            Stack<Node<CsToken>> lists = new Stack<Node<CsToken>>();
+            var lists = new Stack<Node<CsToken>>();
 
             for (Node<CsToken> node = this.tokens.First;
                 node != null;
@@ -109,7 +109,7 @@ namespace Community.StyleCop.CSharp
                         string message = string.Format(
                             CultureInfo.CurrentCulture,
                             "Unexpected token class '{0}'.",
-                            token.CsTokenClass.ToString());
+                            token.CsTokenClass);
                         throw new InvalidOperationException(message);
 
                     // Were tokens forgotten?
@@ -117,7 +117,7 @@ namespace Community.StyleCop.CSharp
                         message = string.Format(
                             CultureInfo.CurrentCulture,
                             "Unknown token class '{0}'.",
-                            token.CsTokenClass.ToString());
+                            token.CsTokenClass);
                         throw new InvalidOperationException(message);
                 }
             }

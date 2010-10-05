@@ -72,7 +72,7 @@ namespace Community.StyleCop.CSharp
                 document.Settings,
                 Strings.IncludeGenerated);
 
-            CsDocument csDocument = (CsDocument)document;
+            var csDocument = (CsDocument)document;
             if (csDocument.RootElement != null &&
                 (this.IncludeGenerated ||
                 !csDocument.RootElement.Generated))
@@ -113,16 +113,14 @@ namespace Community.StyleCop.CSharp
             Param.RequireNotNull(settings, "settings");
             Param.RequireValidString(propertyName, "propertyName");
 
-            PropertyValue<T> propertyValue =
+            var propertyValue =
                 this.GetSetting(settings, propertyName) as PropertyValue<T>;
             if (propertyValue != null)
             {
                 return propertyValue.Value;
             }
-            else
-            {
-                return this.GetDefaultValue<T>(propertyName);
-            }
+
+            return this.GetDefaultValue<T>(propertyName);
         }
 
         /// <summary>
@@ -183,7 +181,7 @@ namespace Community.StyleCop.CSharp
         {
             Param.RequireValidString(propertyName, "propertyName");
 
-            PropertyDescriptor<T> descriptor =
+            var descriptor =
                 this.PropertyDescriptors[propertyName]
                 as PropertyDescriptor<T>;
             if (descriptor == null)
@@ -281,7 +279,7 @@ namespace Community.StyleCop.CSharp
                 this.CheckMultiLineComment(
                     rootElement,
                     token,
-                    (string s, int i) => HasTrailingWhitespace(s),
+                    (s, i) => HasTrailingWhitespace(s),
                     Rules.LinesMustNotEndWithWhitespace);
             }
         }
@@ -320,7 +318,7 @@ namespace Community.StyleCop.CSharp
                 "token",
                 "The supplied token is not a multi-line comment.");
 
-            string[] newLine = new string[] { Environment.NewLine };
+            string[] newLine = new[] { Environment.NewLine };
             string[] splitComment =
                 token.Text.Split(newLine, StringSplitOptions.None);
             for (int index = 0; index < splitComment.Length; index++)
@@ -367,7 +365,7 @@ namespace Community.StyleCop.CSharp
             if (token.CsTokenType == CsTokenType.MultiLineComment)
             {
                 int startIndex = token.Location.StartPoint.IndexOnLine;
-                Func<string, int, bool> checkDelegate = (string s, int i) =>
+                Func<string, int, bool> checkDelegate = (s, i) =>
                     ((i == 0) ? startIndex : 0) + s.Length > maximumLineLength;
                 this.CheckMultiLineComment(
                     rootElement,
