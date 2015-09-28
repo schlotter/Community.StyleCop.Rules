@@ -77,6 +77,12 @@ namespace Community.StyleCop.CSharp
                 (this.IncludeGenerated ||
                 !csDocument.RootElement.Generated))
             {
+                if (csDocument.Tokens != null && csDocument.Tokens.Count == 0)
+                {
+                    // early return if document is empty.
+                    return;
+                }
+
                 // check start of document
                 this.CheckIfFileStartsWithWhitespace(
                     csDocument.RootElement,
