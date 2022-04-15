@@ -1,6 +1,8 @@
 StyleCop Community Rules
 ========================
 
+⚠️ **This repository has been archived because its contents are outdated. Nowadays, [StyleCop Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers) shall be used for checking StyleCop rules.** The [StyleCop "Classic"](https://github.com/StyleCop/StyleCop) project which was targeted by this repository is no longer active. (April 15, 2022) ⚠️
+
 StyleCop Community Rules contain additional rules for [Microsoft StyleCop](http://code.msdn.microsoft.com/sourceanalysis).
 
 Rules
